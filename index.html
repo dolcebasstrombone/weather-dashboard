@@ -17,24 +17,30 @@
   </head>
 
   <body>
-    <header>
-      <h1>Weather Dashboard</h1>
+    <header class="bg-success bg-opacity-50">
+      <h1 class="text-white">Weather Dashboard</h1>
     </header>
 
-    <aside>
-      <!-- search for a city: -->
-      <!-- submit button -->
+    <aside class="flex-column">
+      <h2>Search for a City:</h2>
+      <input type="text" name="city" id="city">
+      <button id="search">Search</button>
+      <div id="saved-cities" class="">
       <!-- previously searched location buttons (created dynamically) -->
+      </div>
     </aside>
 
-    <main> <!-- all created dynamically -->
-      <!-- current weather div -->
-      <!-- --- city name, date, current weather icon -->
-      <!-- --- ul with temp, wind, humidity, uv index -->
-
-      <!-- 5 day forecast div -->
-      <!-- --- "5 day forecast" -->
-      <!-- --- row of cards with date, icon, temp, wind humidity -->
+    <main>
+      <!-- current day div -->
+      <div id="current-forecast">
+        <!-- --- city name, date, current weather icon -->
+        <!-- --- ul with temp, wind, humidity, uv index -->
+      </div>
+      <!-- 5 day forecast -->
+      <div id="future-forecast">
+        <!-- --- "5 day forecast" -->
+        <!-- --- row of cards with date, icon, temp, wind, humidity -->
+      </div>
     </main>
   </body>
 
