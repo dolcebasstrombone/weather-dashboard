@@ -6,12 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <!-- Bootstrap -->
+    <!-- For Bootstrap CSS -->
     <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
       rel="stylesheet"
-      integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
-      crossorigin="anonymous"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     />
+    <!-- For FontAwesome Icons -->
+    <script
+      src="https://kit.fontawesome.com/eaf13a0381.js"
+      crossorigin="anonymous"
+    ></script>
     <!-- native CSS -->
     <link rel="stylesheet" href="./assets/css/styles.css" />
   </head>
@@ -23,39 +27,37 @@
 
     <aside class="flex-column">
       <h2>Search for a City:</h2>
-      <input type="text" name="city" id="city">
+      <input type="text" name="city" id="city" />
       <button id="search">Search</button>
       <div id="saved-cities" class="">
-      <!-- previously searched location buttons (created dynamically) -->
+        <!-- dynamically created buttons for previous searches go here -->
       </div>
     </aside>
 
     <main>
       <!-- current day div -->
       <div id="current-forecast">
-        <!-- --- city name, date, current weather icon -->
-        <!-- --- ul with temp, wind, humidity, uv index -->
+        <div id="current-header" class="d-flex flex-row">
+          <!-- --- city name, date, current weather icon -->
+        </div>
+        <ul id="current-info">
+          <!-- --- ul with temp, wind, humidity, uv index -->
+        </ul>
       </div>
       <!-- 5 day forecast -->
       <div id="future-forecast">
-        <!-- --- "5 day forecast" -->
+        <h3 id="future-header"></h3>
+        <div id="card-container">
         <!-- --- row of cards with date, icon, temp, wind, humidity -->
+        </div>
       </div>
     </main>
   </body>
 
-  <!-- jQuery  -->
-  <script
-    src="https://code.jquery.com/jquery-3.6.0.min.js"
-    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
-    crossorigin="anonymous"
-  ></script>
-  <!-- Bootsstap jQ bundle -->
-  <script
-    src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js"
-    integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy"
-    crossorigin="anonymous"
-  ></script>
+  <!-- For jQuery -->
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <!-- For Moment -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
   <!-- native JS -->
   <script src="./assets/js/script.js"></script>
 </html>
