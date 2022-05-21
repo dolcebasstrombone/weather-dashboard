@@ -21,37 +21,35 @@
   </head>
 
   <body>
-    <header class="bg-success bg-opacity-50">
-      <h1 class="text-white">Weather Dashboard</h1>
+    <header class="p-3">
+      <h1>Weather Dashboard</h1>
     </header>
-
-    <aside class="flex-column">
-      <h2>Search for a City:</h2>
-      <input type="text" name="city" id="city" />
-      <button id="search">Search</button>
-      <div id="saved-cities" class="">
-        <!-- dynamically created buttons for previous searches go here -->
-      </div>
-    </aside>
-
-    <main>
-      <!-- current day div -->
-      <div id="current-forecast">
-        <div id="current-header" class="d-flex flex-row">
-          <!-- --- city name, date, current weather icon -->
+    <div id="main-container">
+      <aside class="d-flex flex-column">
+        <h2>Search for a City:</h2>
+        <input type="text" name="city" id="city" />
+        <button id="search">Search</button>
+        <div id="saved-cities" class="d-flex flex-column">
+          <!-- dynamically created buttons for previous searches go here -->
         </div>
-        <ul id="current-info">
-          <!-- --- ul with temp, wind, humidity, uv index -->
-        </ul>
-      </div>
-      <!-- 5 day forecast -->
-      <div id="future-forecast">
-        <h3 id="future-header"></h3>
-        <div id="card-container">
-        <!-- --- row of cards with date, icon, temp, wind, humidity -->
+      </aside>
+
+      <main class="">
+        <!-- current day div -->
+        <div id="current-forecast">
+          <div id="current-header" class="d-flex flex-row">
+            <!-- --- city name, date, current weather icon -->
+          </div>
         </div>
-      </div>
-    </main>
+        <!-- 5 day forecast -->
+        <div id="future-forecast">
+          <h3 id="future-header"></h3>
+          <div id="card-container">
+            <!-- --- row of cards with date, icon, temp, wind, humidity -->
+          </div>
+        </div>
+      </main>
+    </div>
   </body>
 
   <!-- For jQuery -->

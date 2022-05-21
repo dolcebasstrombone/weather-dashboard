@@ -1,0 +1,122 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --purple: #202b60;
+  --yellow: #ffdf80;
+}
+
+body {
+  background-color: #d9ddf2;
+  color: var(--purple);
+}
+
+header {
+  background-image: linear-gradient(to bottom right, var(--purple), #2d3c86);
+  background: cover;
+  color: var(--yellow);
+}
+
+aside {
+    width: 25%;
+    padding: 15px;
+}
+
+main {
+    width: 75%;
+    padding: 0 15px;
+}
+
+input {
+  margin: 10px;
+  padding: 5px;
+  border: none;
+  border-radius: 7px;
+}
+
+button {
+  margin: 10px;
+  padding: 5px;
+  background-image: linear-gradient(to bottom right, var(--purple), #2d3c86);
+  border: none;
+  border-radius: 7px;
+  font-weight: bold;
+  color: var(--yellow);
+}
+
+h2 {
+    font-size: 30px;
+    font-size: 28px;
+}
+
+h3 {
+  margin: 5px;
+  padding: 0 0 5px 5px;
+  font-size: 25px;
+}
+
+h4 {
+    font-size: 20px;
+    text-decoration: underline;
+}
+
+.card {
+  border: 2px solid var(--purple);
+  border-radius: 7px;
+  margin: 15px 0;
+}
+
+#main-container {
+    display: flex;
+    flex-direction: row;
+}
+
+#future-forecast .card {
+  background-color: var(--purple);
+  background-image: linear-gradient(to bottom right, var(--purple), #263373);
+  color: var(--yellow);
+  margin: 5px;
+  width: 20%;
+}
+
+/* -------------------------------------------------------------------TODO not working? */
+#saved-cities {
+  margin-top: 5px;
+  border-top: 2px solid var(--purple);
+  padding-top: 5px;
+}
+
+#saved-cities button {
+  background-color: #ffecb3;
+  background-image: none;
+  color: var(--purple);
+}
+
+#card-container {
+    display: flex;
+    flex-direction: row;
+}
+
+@media screen and (max-width: 1014px) {
+    aside, main {
+        width: 100%
+    }
+
+    #main-container {
+        flex-direction: column;
+    }
+}
+
+@media screen and (max-width: 760px) {
+    #card-container {
+        flex-direction: column;
+    }
+
+    #future-forecast .card {
+        margin: 5px;
+        width: 100%;
+      }
+}
