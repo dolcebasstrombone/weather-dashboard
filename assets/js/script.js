@@ -8,71 +8,81 @@ function searchButtonClick() {
     var alertText = $("<p>").text("Please enter a city.");
     alertContainer.append(alertText);
   } else {
-    displayNameAndQuery(cityInput);
+    fetchAndDisplayLocation(cityInput);
   }
 }
 
 function savedButtonClick() {
   var cityName = this.textContent;
-  displayNameAndQuery(cityName);
+  fetchAndDisplayLocation(cityName);
 }
 
-function displayNameAndQuery(cityInput) {
+function fetchAndDisplayLocation(cityInput) {
   //clear input and alert text
   $("#city").val("");
   $("#alert").text("");
-
-  //get array to save names
-  var savedCitiesObj = JSON.parse(localStorage.getItem("savedCitiesObj")) || [];
-  //filter out names that match what was inputted, to avoid duplicates
-  savedCitiesObj = savedCitiesObj.filter(function (names) {
-    return names !== cityInput;
-  });
-  //push the inputted name and save to local storage
-  savedCitiesObj.push(cityInput);
-  localStorage.setItem("savedCitiesObj", JSON.stringify(savedCitiesObj));
-
-  //create and display city name and date
-  var currentForecastEl = $("#current-forecast");
-  currentForecastEl.text("");
-  var currentCardEl = $("<div>").addClass("card");
-  var currentCardBodyEl = $("<div>").addClass("card-body");
-  var cityNameDateEl = $("<h2>")
-    .addClass("card-title")
-    .text(cityInput + " (" + moment().format("MM[/]DD[/]YY") + ")");
-  currentCardBodyEl.append(cityNameDateEl);
-  currentCardEl.append(currentCardBodyEl);
-  currentForecastEl.append(currentCardEl);
-
-  //create a saved city button
-  var savedCitiesContainer = $("#saved-cities");
-  var savedCity = $("<button>")
-    .addClass("saved-city")
-    .text(cityInput)
-    .on("click", savedButtonClick);
-  savedCitiesContainer.append(savedCity);
-
-  //-----------------------------------------------------------------------------------------TODO create buttons from local storage
-  //----------------------------------------------------------------------TODO dont execute above code if the button already exists
 
   //get lon and lat of city, pass it on
   var requestLocationUrl =
     "http://api.openweathermap.org/geo/1.0/direct?q=" +
     cityInput +
     "&limit=1&appid=cb9916baff495c48795f434351381868";
+
   fetch(requestLocationUrl)
     .then(function (response) {
-      console.log(resonse.json());
-        return response.json();
+      return response.json();
     })
     .catch(function (error) {
-        alert('Error: Unable to connect');
+      alert("Error: Unable to connect");
     })
-    // .then(function (data) {
-    //   var lat = data[0].lat;
-    //   var lon = data[0].lon;
-    //   getWeatherInfo(lat, lon);
-    // });
+    .then(function (data) {
+      if (data.length === 0) {
+        var alertContainer = $("#alert").text("");
+        var alertText = $("<p>").text("Please enter a city.");
+        alertContainer.append(alertText);
+      } else {
+        var name = data[0].name;
+        var lat = data[0].lat;
+        var lon = data[0].lon;
+        getWeatherInfo(lat, lon);
+        cityNameHandler(name);
+      }
+    });
+
+  function cityNameHandler(cityName) {
+    //get array to save names
+    var savedCitiesObj =
+      JSON.parse(localStorage.getItem("savedCitiesObj")) || [];
+    //filter out names that match what was inputted, to avoid duplicates
+    savedCitiesObj = savedCitiesObj.filter(function (names) {
+      return names !== cityName;
+    });
+    //push the inputted name and save to local storage
+    savedCitiesObj.push(cityName);
+    localStorage.setItem("savedCitiesObj", JSON.stringify(savedCitiesObj));
+
+    //create and display city name and date
+    var currentForecastEl = $("#current-forecast");
+    currentForecastEl.text("");
+    var currentCardEl = $("<div>").addClass("card");
+    var currentCardBodyEl = $("<div>").addClass("card-body");
+    var cityNameDateEl = $("<h2>")
+      .addClass("card-title")
+      .text(cityName + " (" + moment().format("MM[/]DD[/]YY") + ")");
+    currentCardBodyEl.append(cityNameDateEl);
+    currentCardEl.append(currentCardBodyEl);
+    currentForecastEl.append(currentCardEl);
+
+    //create a saved city button
+    var savedCitiesContainer = $("#saved-cities");
+    var savedCity = $("<button>")
+      .addClass("saved-city")
+      .text(cityName)
+      .on("click", savedButtonClick);
+    savedCitiesContainer.append(savedCity);
+  }
+  //-----------------------------------------------------------------------------------------TODO create buttons from local storage
+  //----------------------------------------------------------------------TODO dont execute above code if the button already exists
 }
 
 function getWeatherInfo(lat, lon) {
@@ -82,6 +92,7 @@ function getWeatherInfo(lat, lon) {
     "&lon=" +
     lon +
     "&exclude=minutely,hourly&appid=cb9916baff495c48795f434351381868";
+
   fetch(requestUrl)
     .then(function (response) {
       return response.json();
