@@ -5,17 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Weather Dashboard</title>
-    <!-- Bootstrap -->
-    <!-- For Bootstrap CSS -->
+    <!-- Bootstrap CSS -->
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     />
-    <!-- For FontAwesome Icons -->
-    <script
-      src="https://kit.fontawesome.com/eaf13a0381.js"
-      crossorigin="anonymous"
-    ></script>
     <!-- native CSS -->
     <link rel="stylesheet" href="./assets/css/styles.css" />
   </head>
@@ -39,14 +33,14 @@
         <!-- current day div -->
         <div id="current-forecast">
           <div id="current-header" class="d-flex flex-row">
-            <!-- --- city name, date, current weather icon -->
+            <!-- dynamically created current day weather info goes here -->
           </div>
         </div>
         <!-- 5 day forecast -->
         <div id="future-forecast">
           <h3 id="future-header"></h3>
           <div id="card-container">
-            <!-- --- row of cards with date, icon, temp, wind, humidity -->
+            <!-- dynamically created future day weather info cards go here -->
           </div>
         </div>
       </main>

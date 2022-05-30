@@ -7,7 +7,7 @@
 :root {
   --purple: #202b60;
   --yellow: #ffdf80;
-  --light-yellow: #c6cceb;
+  --light-purple: #c6cceb;
 }
 
 body {
@@ -22,13 +22,13 @@ header {
 }
 
 aside {
-    width: 25%;
-    padding: 15px;
+  width: 25%;
+  padding: 15px;
 }
 
 main {
-    width: 75%;
-    padding: 0 15px;
+  width: 75%;
+  padding: 0 15px;
 }
 
 input {
@@ -49,8 +49,8 @@ button {
 }
 
 h2 {
-    font-size: 30px;
-    font-size: 28px;
+  font-size: 30px;
+  font-size: 28px;
 }
 
 h3 {
@@ -60,8 +60,8 @@ h3 {
 }
 
 h4 {
-    font-size: 20px;
-    text-decoration: underline;
+  font-size: 20px;
+  text-decoration: underline;
 }
 
 .card {
@@ -109,8 +109,8 @@ h4 {
 }
 
 #main-container {
-    display: flex;
-    flex-direction: row;
+  display: flex;
+  flex-direction: row;
 }
 
 #future-forecast .card {
@@ -121,7 +121,6 @@ h4 {
   width: 20%;
 }
 
-/* -------------------------------------------------------------------TODO not working? */
 #saved-cities {
   margin-top: 5px;
   border-top: 2px solid var(--purple);
@@ -135,27 +134,28 @@ h4 {
 }
 
 #card-container {
-    display: flex;
-    flex-direction: row;
+  display: flex;
+  flex-direction: row;
 }
 
 @media screen and (max-width: 1083px) {
-    aside, main {
-        width: 100%
-    }
+  aside,
+  main {
+    width: 100%;
+  }
 
-    #main-container {
-        flex-direction: column;
-    }
+  #main-container {
+    flex-direction: column;
+  }
 }
 
 @media screen and (max-width: 812px) {
-    #card-container {
-        flex-direction: column;
-    }
+  #card-container {
+    flex-direction: column;
+  }
 
-    #future-forecast .card {
-        margin: 5px;
-        width: 100%;
-      }
+  #future-forecast .card {
+    margin: 5px;
+    width: 100%;
+  }
 }

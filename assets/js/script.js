@@ -14,9 +14,10 @@ function init() {
 }
 init();
 
-//on click user input as variable
+//listener on the search button
 $("#search").on("click", searchButtonClick);
 
+//check user input, pass on if acceptable
 function searchButtonClick() {
   var cityInput = $("#city").val().trim();
   if (cityInput === "" || null) {
@@ -28,6 +29,7 @@ function searchButtonClick() {
   }
 }
 
+//called from the listener on the saved buttons
 function savedButtonClick() {
   var cityName = this.textContent;
   fetchAndDisplayLocation(cityName);
@@ -76,7 +78,6 @@ function fetchAndDisplayLocation(cityInput) {
     //push the inputted name and save to local storage
     savedCitiesObj.push(cityName);
     localStorage.setItem("savedCitiesObj", JSON.stringify(savedCitiesObj));
-
     //create and display city name and date
     var currentForecastEl = $("#current-forecast");
     currentForecastEl.text("");
@@ -88,7 +89,6 @@ function fetchAndDisplayLocation(cityInput) {
     currentCardBodyEl.append(cityNameDateEl);
     currentCardEl.append(currentCardBodyEl);
     currentForecastEl.append(currentCardEl);
-
     //create a saved city button, avoiding duplicates
     var sameSavedCity = document.getElementById(cityName);
     if (sameSavedCity === null || undefined) {
@@ -164,14 +164,11 @@ function displayWeather(currentData, dailyData) {
   }
   currentUviEl.append(uviSpanEl);
   cardBodyEl.append(currentUviEl);
-  //-------------------------------------------------------------------------------TODO change uvi background to be color coded
 
   //create the header for the future container
   $("#future-header").text("5-Day Forecast:");
-
   //empty card container
   $("#card-container").text("");
-
   //create cards for the next 5 days
   for (var i = 1; i < 6; i++) {
     dayData = dailyData[i];

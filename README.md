@@ -1,13 +1,10 @@
 # weather-dashboard
 
-## user story
+## User Story
 * AS A traveler
 * I WANT to see the weather outlook for multiple cities
 * SO THAT I can plan a trip accordingly
-
-## acceptance criteria
 * GIVEN a weather dashboard with form inputs:
-
 * WHEN I search for a city
 * THEN I am presented with current and future conditions for that city and that city is added to the search history
 * WHEN I view current weather conditions for that city
@@ -19,9 +16,9 @@
 * WHEN I click on a city in the search history
 * THEN I am again presented with current and future conditions for that city
 
-## mock up
-![Mock Up](./assets/images/mock-up.png)
+## Screenshot
+![Screenshot](./assets/images/screenshot.png)
 
 ## Repo and Live page
-[Repository]()
-[Live Page]()
+[Repository](https://github.com/dolcebasstrombone/weather-dashboard)
+[Live Page](https://dolcebasstrombone.github.io/weather-dashboard/)
