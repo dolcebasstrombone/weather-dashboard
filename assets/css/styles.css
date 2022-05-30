@@ -7,6 +7,7 @@
 :root {
   --purple: #202b60;
   --yellow: #ffdf80;
+  --light-yellow: #c6cceb;
 }
 
 body {
@@ -67,6 +68,44 @@ h4 {
   border: 2px solid var(--purple);
   border-radius: 7px;
   margin: 15px 0;
+}
+
+.favorable {
+  color: white;
+  font-weight: bold;
+  background-color: #a1deab;
+  padding: 2px 10px;
+  border-radius: 7px;
+}
+
+.moderate {
+  color: white;
+  font-weight: bold;
+  background-color: #dec4a1;
+  padding: 2px 10px;
+  border-radius: 7px;
+}
+
+.severe {
+  color: white;
+  font-weight: bold;
+  background-color: #d1817a;
+  padding: 2px 10px;
+  border-radius: 7px;
+}
+
+.card-icon {
+  width: 50px;
+  height: 50px;
+  background-color: var(--light-yellow);
+  border-radius: 7px;
+  margin-bottom: 5px;
+}
+
+.current-icon {
+  background-color: var(--light-yellow);
+  margin-bottom: 5px;
+  border-radius: 7px;
 }
 
 #main-container {

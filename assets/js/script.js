@@ -1,3 +1,19 @@
+function init() {
+  //get array to save names
+  var savedCitiesObj = JSON.parse(localStorage.getItem("savedCitiesObj")) || [];
+  savedCitiesObj.forEach(function (city) {
+    //create a saved city button
+    var savedCitiesContainer = $("#saved-cities");
+    var savedCity = $("<button>")
+      .addClass("saved-city")
+      .attr("id", city)
+      .text(city)
+      .on("click", savedButtonClick);
+    savedCitiesContainer.append(savedCity);
+  });
+}
+init();
+
 //on click user input as variable
 $("#search").on("click", searchButtonClick);
 
@@ -73,16 +89,27 @@ function fetchAndDisplayLocation(cityInput) {
     currentCardEl.append(currentCardBodyEl);
     currentForecastEl.append(currentCardEl);
 
-    //create a saved city button
-    var savedCitiesContainer = $("#saved-cities");
-    var savedCity = $("<button>")
-      .addClass("saved-city")
-      .text(cityName)
-      .on("click", savedButtonClick);
-    savedCitiesContainer.append(savedCity);
+    //create a saved city button, avoiding duplicates
+    var sameSavedCity = document.getElementById(cityName);
+    if (sameSavedCity === null || undefined) {
+      var savedCitiesContainer = $("#saved-cities");
+      var savedCity = $("<button>")
+        .addClass("saved-city")
+        .attr("id", cityName)
+        .text(cityName)
+        .on("click", savedButtonClick);
+      savedCitiesContainer.append(savedCity);
+    } else {
+      sameSavedCity.remove();
+      var savedCitiesContainer = $("#saved-cities");
+      var savedCity = $("<button>")
+        .addClass("saved-city")
+        .attr("id", cityName)
+        .text(cityName)
+        .on("click", savedButtonClick);
+      savedCitiesContainer.append(savedCity);
+    }
   }
-  //-----------------------------------------------------------------------------------------TODO create buttons from local storage
-  //----------------------------------------------------------------------TODO dont execute above code if the button already exists
 }
 
 function getWeatherInfo(lat, lon) {
@@ -91,7 +118,7 @@ function getWeatherInfo(lat, lon) {
     lat +
     "&lon=" +
     lon +
-    "&exclude=minutely,hourly&appid=cb9916baff495c48795f434351381868";
+    "&units=imperial&exclude=minutely,hourly&appid=cb9916baff495c48795f434351381868";
 
   fetch(requestUrl)
     .then(function (response) {
@@ -105,19 +132,37 @@ function getWeatherInfo(lat, lon) {
 }
 
 function displayWeather(currentData, dailyData) {
-  //-----------------------------------------------------------------------------TODO use cloud info to choose and display icon
-  //currentCloudEl = $('<li>').text('' + currentData.clouds);
-  //currentInfoEl.append(currentCloudEl);
-
   //create children for current info card
   var cardBodyEl = $(".card-body");
-  var currentTempEl = $("<p>").text("Temperature: " + currentData.temp);
+  //create and append icon
+  var iconCode = currentData.weather[0].icon;
+  var iconLocation = "./assets/images/" + iconCode + ".png";
+  var currentCloudEl = $("<img>")
+    .addClass("current-icon")
+    .attr("src", iconLocation);
+  cardBodyEl.append(currentCloudEl);
+  //create and append temperature
+  var currentTempEl = $("<p>").text("Temperature: " + currentData.temp + " °F");
   cardBodyEl.append(currentTempEl);
-  var currentHumidityEl = $("<p>").text("Humidity: " + currentData.humidity);
-  cardBodyEl.append(currentHumidityEl);
-  var currentWindEl = $("<p>").text("Wind: " + currentData.wind_speed);
+  //create and append wind speed
+  var currentWindEl = $("<p>").text("Wind: " + currentData.wind_speed + " MPH");
   cardBodyEl.append(currentWindEl);
-  var currentUviEl = $("<p>").text("UV Index: " + currentData.uvi);
+  //create and append humidity
+  var currentHumidityEl = $("<p>").text(
+    "Humidity: " + currentData.humidity + "%"
+  );
+  cardBodyEl.append(currentHumidityEl);
+  //create and append uvi
+  var currentUviEl = $("<p>").text("UV Index: ");
+  var uviSpanEl = $("<span>").text(currentData.uvi);
+  if (currentData.uvi < 3.33) {
+    uviSpanEl.addClass('favorable');
+  } else if (currentData.uvi > 6.66) {
+    uviSpanEl.addClass('severe');
+  } else {
+    uviSpanEl.addClass('moderate');
+  }
+  currentUviEl.append(uviSpanEl);
   cardBodyEl.append(currentUviEl);
   //-------------------------------------------------------------------------------TODO change uvi background to be color coded
 
@@ -127,33 +172,38 @@ function displayWeather(currentData, dailyData) {
   //empty card container
   $("#card-container").text("");
 
-  //console.log(dailyData); //skip 0, for each date, clouds, temp, wind_speed, humidity
   //create cards for the next 5 days
   for (var i = 1; i < 6; i++) {
     dayData = dailyData[i];
     var cardContainerEl = $("#card-container");
     var dayCardEl = $("<div>").addClass("card");
     var dayCardBodyEl = $("<div>").addClass("card-body");
-    //add title for date with class card-title
+    //add title for date
     var cardTitleEl = $("<h4>")
       .addClass("card-title")
       .text(moment().add(i, "days").format("MM[/]DD[/]YY"));
     dayCardBodyEl.append(cardTitleEl);
-    //---------------------------------------------------------------------------------------------TODO add icon based on cloud
-    //add card text for temp with class card-text
+    //add weather icon
+    var iconCode = dayData.weather[0].icon;
+    var iconLocation = "./assets/images/" + iconCode + ".png";
+    var dayCloudEl = $("<img>")
+      .addClass("card-icon card-text")
+      .attr("src", iconLocation);
+    dayCardBodyEl.append(dayCloudEl);
+    //add card text for temp
     var dayTempEl = $("<p>")
       .addClass("card-text")
-      .text("Temp: " + dayData.temp.day);
+      .text("Temp: " + dayData.temp.day + " °F");
     dayCardBodyEl.append(dayTempEl);
-    //add card text for wind_speed with class card-text
+    //add card text for wind_speed
     var dayWindEl = $("<p>")
       .addClass("card-text")
-      .text("Wind: " + dayData.wind_speed);
+      .text("Wind: " + dayData.wind_speed + " MPH");
     dayCardBodyEl.append(dayWindEl);
-    //add card text for humidity with class card-text
+    //add card text for humidity
     var dayHumidityEl = $("<p>")
       .addClass("card-text")
-      .text("Humidity: " + dayData.humidity);
+      .text("Humidity: " + dayData.humidity + "%");
     dayCardBodyEl.append(dayHumidityEl);
     //append the whole card
     dayCardEl.append(dayCardBodyEl);
