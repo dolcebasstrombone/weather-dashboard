@@ -139,7 +139,7 @@ h4 {
     flex-direction: row;
 }
 
-@media screen and (max-width: 1014px) {
+@media screen and (max-width: 1083px) {
     aside, main {
         width: 100%
     }
@@ -149,7 +149,7 @@ h4 {
     }
 }
 
-@media screen and (max-width: 760px) {
+@media screen and (max-width: 812px) {
     #card-container {
         flex-direction: column;
     }
