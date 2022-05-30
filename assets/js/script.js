@@ -42,7 +42,7 @@ function fetchAndDisplayLocation(cityInput) {
 
   //get lon and lat of city, pass it on
   var requestLocationUrl =
-    "http://api.openweathermap.org/geo/1.0/direct?q=" +
+    "https://api.openweathermap.org/geo/1.0/direct?q=" +
     cityInput +
     "&limit=1&appid=cb9916baff495c48795f434351381868";
 
